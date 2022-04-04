@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mantenimiento de Proveedores</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+	<style>
+		div.dataTables_info {
+			color: #0274d8;
+			font-size: 12px;
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand">Listado de Proveedores</a>
+        </div>
+    </nav>
+	<div class="container mt-4">
+		<div class="row justify-content-center">
+			<div class="col-sm-10 bg-light shadow">
+				<div class="col-sm-10 float-start m-2">
+					<div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
+						<button id="return" type="button" class="btn btn-primary btn-sm me-2">
+							<i class="bi bi-house text-light"> Inicio</i>
+						</button>
+						<button id="nuevo" type="button" class="btn btn-primary btn-sm">
+							<i class="bi bi-plus-circle-dotted text-light"> Nuevo</i>
+						</button>
+					</div>
+				</div>
+				<table id="tblProveedor"
+					class="table table-sm table-hover table-striped table-condensed display compact">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th></th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+	<script>
+
+		let registros;
+	
+		window.comunicacion.mostrarProveedores();
+
+		window.comunicacion.cargarDatosProveedor(function (event, datos) {
+
+			registros = [...datos];
+
+			$('#tblProveedor').dataTable({
+				"data": registros,
+				"searching": false,
+				"lengthChange": false,
+				"columns": [
+					{ "data": "nombre" },
+					{
+						"title": "Opciones",
+						"data": "idProveedor",
+						"searchable": false,
+						"sortable": false,
+						"width": "100px",
+						"render": function (data, type, full) { return '<a onclick=Editar(' + data + ') class="btn btn-warning btn-sm me-2"><i class="bi bi-pencil text-light"></i></a><a onclick=Borrar(' + data + ') class="btn btn-danger btn-sm"><i class="bi bi-trash text-ligh"></i></a>' }
+					},
+				],
+				"language": {
+					"url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+				},
+				"lengthMenu": [[5, 10, 20, 50], [5, 10, 20, 50]]
+			});
+
+		});
+
+		function Editar(id) {
+			const item = registros.filter(fila => fila.idProveedor === id);
+			window.comunicacion.mostrarUIProveedor(item);
+		}
+
+		function Borrar(id) {
+			const item = registros.filter(fila => fila.idProveedor === id);
+			window.comunicacion.borrarProveedor(item);
+		}
+
+		document.getElementById('nuevo').addEventListener('click', () => {
+            window.comunicacion.mostrarUIProveedor([{ idProveedor: 0, nombre: '' }]);
+        });
+
+		document.getElementById('return').addEventListener('click', () => {
+            window.comunicacion.regresar();
+        });
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="sp">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Byron Burgos">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Registro de Usuarios</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+
+<body>
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-sm-center h-100">
+				<div class="col-sm-9">
+					<div class="card shadow-lg my-5">
+						<div class="card-body">
+							<h1 class="fs-4 card-title fw-bold mb-2">Registro de Usuarios</h1>
+							<form id="frmRegistro" method="POST" class="needs-validation" novalidate="" autocomplete="off">
+								<div class="mb-3">
+									<label class="mb-2 text-muted" for="nombre">Nombre de Usuario</label>
+									<input id="nombre" type="text" class="form-control form-control-sm" name="name" value="" required autofocus>
+									<div id="divErrNombre" class="invalid-feedback">El nombre del usuario es un dato requerido</div>
+								</div>
+
+								<div class="mb-3">
+									<label class="mb-1 text-muted" for="correo">Correo</label>
+									<input id="correo" type="email" class="form-control form-control-sm" name="email" value="" required>
+									<div id="divErrMail" class="invalid-feedback"></div>
+								</div>
+
+								<div class="mb-3">
+									<label class="mb-1 text-muted" for="password">Contraseña</label>
+									<input id="password" type="password" class="form-control form-control-sm" name="password" required>
+								    <div id="divErrPass" class="invalid-feedback"></div>
+								</div>
+
+								<div class="mb-3">
+									<label class="mb-1 text-muted" for="password2">Confirmar Constraseña</label>
+									<input id="password2" type="password" class="form-control form-control-sm" name="password" required>
+								    <div id="divErrPass2" class="invalid-feedback"></div>
+								</div>                                
+
+								<div class="align-items-center d-flex">
+									<button type="submit" class="btn btn-primary ms-auto">
+										Registrar	
+									</button>
+								</div>
+							</form>
+						</div>
+						<div class="card-footer border-0">
+							<div class="text-center">
+								Ya tienes cuenta? <a href="login.html" class="text-dark">Login</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="registro.js"></script>
+
+</body>
+</html>
